@@ -1,0 +1,1 @@
+A simple battleship game where a player picks a row and column to "shoot" and the opponant responds by saying "hit" or "miss."  A visual grid is made to help the player remember when he has already guessed.  2 player or player vs computer is still to be decided. both would be ideal.
