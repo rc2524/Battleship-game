@@ -33,7 +33,21 @@ public:
 	bool recieveShot( Location spot );
 
 	// Gets the spot value (empty, hasShip, beenShotEmpty, beenShotHasShip, etc.)
-	spotStaus getSpotValue( Location spot );
+	// Board coordinates are layed out as follows:
+	// O---------------------> [columns]
+	// |      [3,0]
+	// |
+	// |[0,3]
+	// |
+	// |
+	// |
+	// |
+	// |
+	// V [rows]
+	spotStatus getSpotValue( Location spot );
+
+	// Returns a location where x = rows and y = columns.  This is the bottom-right corner of the board.
+	Location getBoardSize();
 
 	// Places a ship on the board
 	// Args:
@@ -52,5 +66,5 @@ public:
 
 private:
 	int rows, columns;
-	int *board_data;
+	spotStatus *board_data;
 };

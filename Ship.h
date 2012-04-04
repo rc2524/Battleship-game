@@ -48,6 +48,8 @@ public:
 	// Return the location of the aft of the ship
 	Location getLocation();
 
+	// Return the ship type
+	shipType getShipType();
 
 private:
 	Location whereAmI;
