@@ -13,6 +13,12 @@ enum spotStatus
 	beenShotHasShip
 };
 
+struct Location
+{
+	int x;
+	int y;
+};
+
 class Board
 {
 public:
@@ -24,10 +30,10 @@ public:
 
 	// Process getting shot at
 	// Will return 0 if miss and 1 if hit.
-	bool recieveShot( int x, int y );
+	bool recieveShot( Location spot );
 
 	// Gets the spot value (empty, hasShip, beenShotEmpty, beenShotHasShip, etc.)
-	spotStaus getSpotValue( int x, int y );
+	spotStaus getSpotValue( Location spot );
 
 	// Places a ship on the board
 	// Args:
@@ -37,7 +43,7 @@ public:
 	//  shipDirection orientation : The orientation of the ship, type from ship.h
 	// Returns:
 	//  bool : 0 if place unsuccessful, 1 if place successful
-	bool placeShip( Ship& newShip, int x, int y, shipDirection orientation );
+	bool placeShip( Ship& newShip, Location spot, shipDirection orientation );
 
 	// Overload operators
 	Board& operator= ( const Board& orig );
