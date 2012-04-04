@@ -3,12 +3,23 @@
 
 #pragma once
 
+#include "Board.h"
+
 enum shipDirection
 {
 	north,
 	south,
 	east,
 	west
+};
+
+enum shipType
+{
+	PT_Boat,
+	Destroyer,
+	Submarine,
+	Battleship,
+	Carrier
 };
 
 class Ship
@@ -23,6 +34,25 @@ public:
 	bool operator== (const Ship& orig );
 	bool operator!= (const Ship& orig );
 
+	// Public member functions
+
+	// Processes the ship getting hit.
+	// Updates ship status based on new hit.
+	// Return 0 if ship is still floating, 1 if ship is sunk
+	// location is the number of spaces from the aft of the ship to the spot that was hit.
+	bool recieveHit( int location );
+
+	// Returns the number of spot on the ship that have not been hit.  Thus, 0 means the ship is sunk.
+	int getStatus();
+
+	// Return the location of the aft of the ship
+	Location getLocation();
+
+
 private:
-	
+	Location whereAmI;
+	shipType myId;
+	int myLength;	// Based on shipType
+	int *myParts;	// Hold the status of each part of the ship, this is an array of length, myLength
+	bool amISunk;
 };
