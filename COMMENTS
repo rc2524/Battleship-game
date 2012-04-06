@@ -11,4 +11,7 @@ statements?
 -The location is the back of the ship.
 
 -I was thinking the ship sizes would be stored in some external file and read by main in case someone wanted to mod the game
- but we can hard code them if you guys want.
+ but we can hard code them if you guys want. **** SEE UPDATE 1 ****
+
+**** UPDATE 1 ****
+Upon further review, I decided that you were correct, and I added the ship lengths into Ship.h as #define's
