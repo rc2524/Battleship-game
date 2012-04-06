@@ -5,6 +5,13 @@
 
 #include "Board.h"
 
+// Defines for ship length
+#define PT_LENGTH 2
+#define DESTROYER_LENGTH 3
+#define SUBMARINE_LENGTH 3
+#define BATTLESHIP_LENGTH 4
+#define CARRIER_LENGTH 5
+
 enum shipDirection
 {
 	north,
@@ -63,11 +70,14 @@ public:
 	// Set the ship direction
 	void setDirection( shipDirection newDir );
 
+	// Return status of a single spot on ship
+	int getSpotStatus( int location );
+
 private:
 	Location whereAmI;	// Board location of the aft of the ship
 	shipType myId;
 	int myLength;	// Based on shipType
-	int *myParts;	// Hold the status of each part of the ship, this is an array of length, myLength
+	int *myParts;	// Hold the status of each part of the ship, this is an array of length, myLength.  0 is ok, 1 is hit
 	bool amISunk;
 	shipDirection facing;	// The direction the ship is facing.
 };
