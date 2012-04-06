@@ -30,9 +30,9 @@ public:
 	Ship( const Ship& orig);	// Copy constructor
 
 	// Overload operators
-	Ship& operator= (const Ship& orig );	// Assignment operator
-	bool operator== (const Ship& orig );
-	bool operator!= (const Ship& orig );
+	Ship& operator= ( const Ship& orig );	// Assignment operator
+	bool operator== ( const Ship& orig );
+	bool operator!= ( const Ship& orig );
 
 	// Public member functions
 
@@ -51,10 +51,23 @@ public:
 	// Return the ship type
 	shipType getShipType();
 
+	// Set the ship location
+	void setLocation( Location newLoc );
+
+	// Return ship Length
+	int getShipLength();
+
+	// Return the ship direction
+	shipDirection getDirection();
+
+	// Set the ship direction
+	void setDirection( shipDirection newDir );
+
 private:
-	Location whereAmI;
+	Location whereAmI;	// Board location of the aft of the ship
 	shipType myId;
 	int myLength;	// Based on shipType
 	int *myParts;	// Hold the status of each part of the ship, this is an array of length, myLength
 	bool amISunk;
+	shipDirection facing;	// The direction the ship is facing.
 };

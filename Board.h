@@ -15,8 +15,14 @@ enum spotStatus
 
 struct Location
 {
-	int x;
-	int y;
+	int row;
+	int column;
+};
+
+struct shipNode
+{
+	Ship data;
+	shipNode *next;
 };
 
 class Board
@@ -33,17 +39,6 @@ public:
 	bool recieveShot( Location spot );
 
 	// Gets the spot value (empty, hasShip, beenShotEmpty, beenShotHasShip, etc.)
-	// Board coordinates are layed out as follows:
-	// O---------------------> [columns]
-	// |      [3,0]
-	// |
-	// |[0,3]
-	// |
-	// |
-	// |
-	// |
-	// |
-	// V [rows]
 	spotStatus getSpotValue( Location spot );
 
 	// Returns a location where x = rows and y = columns.  This is the bottom-right corner of the board.
@@ -67,4 +62,5 @@ public:
 private:
 	int rows, columns;
 	spotStatus *board_data;
+	shipNode *head;
 };
