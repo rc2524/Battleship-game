@@ -4,18 +4,13 @@
 #pragma once
 
 #include "Ship.h"
+#include "Location.h"
 
 #define	EMPTY 1
 #define	HAS_SHIP 2
 #define	BEEN_SHOT_EMPTY 3
 #define	BEEN_SHOT_HAS_SHIP 4
 
-
-struct Location
-{
-	int row;
-	int column;
-};
 
 struct shipNode
 {
@@ -26,6 +21,7 @@ struct shipNode
 class Board
 {
 public:
+
 	Board( );			// Default constructor
 	Board( int height, int width );	// For creating different sized boards
 	Board( Board& orig );		// Copy constructor
@@ -59,6 +55,6 @@ public:
 
 private:
 	int rows, columns;
-	spotStatus *board_data;
+	int *board_data;
 	shipNode *head;
 };

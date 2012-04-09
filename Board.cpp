@@ -23,18 +23,16 @@ Board::Board( int height, int width )
 
 Board::Board( const Board& orig )
 {
-	Location size;
+	Location size();
 	size = orig.getBoardSize();
-	rows = size.row;
-	columns = size.column;
+	rows = size.getRow();
+	columns = size.getColumn();
 	board_data = new int[rows * columns];
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
 		{
-			Location loc;
-			loc.row = i;
-			loc.column = j;
+			Location loc( i, j );
 			board_data[columns * i + j] = orig.getSpotValue( loc );	// Copy the board_data
 		}
 	}
@@ -54,28 +52,26 @@ Board::~Board()
 
 Location Board::getBoardSize()
 {
-	Location size;
-	size.row = rows;
-	size.column = columns;
+	Location size( rows, columns );
 	return size;
 }
 
 int getSpotValue( Location spot )
 {
-	return board_data[columns * spot.row + spot.column];
+	return board_data[columns * spot.getRow() + spot.getColumn()];
 }
 
 bool Board::recieveShot( Location spot )
 {
-	int spotStat = board_data[columns * spot.row + spot.column];
+	int spotStat = board_data[columns * spot.getRow() + spot.getColumn()];
 	if (spotStat == HAS_SHIP)
 	{
-		board_data[columns * spot.row + spot.column] = BEEN_SHOT_HAS_SHIP;
+		board_data[columns * spot.getRow() + spot.getColumn()] = BEEN_SHOT_HAS_SHIP;
 		return 1;
 	}
 	else if (spotStat == EMPTY)
 	{
-		board_data[columns * spot.row + spot.column] = BEEN_SHOT_EMPTY;
+		board_data[columns * spot.getRow() + spot.getColumn()] = BEEN_SHOT_EMPTY;
 		return 0;
 	}
 	else
@@ -88,26 +84,26 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 {
 	if (orientation == NORTH)
 	{
-		if (spot.row < newShip.getShipLength())
+		if (spot.getRow() < newShip.getShipLength())
 			return 0;	// Ship will not fit, not enough vertical room
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * (spot.row - i) + spot.column] = HAS_SHIP;
+				board_data[columns * (spot.getRow() - i) + spot.getColumn()] = HAS_SHIP;
 			}
 		}
 	}
 
 	else if (orientation == SOUTH)
 	{
-		if ((rows - spot.row) < newShip.getShipLength())
+		if ((rows - spot.getRow()) < newShip.getShipLength())
 			return 0;	// Ship will not fit.
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * (spot.row + i) + spot.column] = HAS_SHIP;
+				board_data[columns * (spot.getRow() + i) + spot.getColumn()] = HAS_SHIP;
 			}
 			newShip.setLocation( spot );
 			newShip.setDirection( orientation );
@@ -116,26 +112,26 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 
 	else if (orientation == EAST)
 	{
-		if ((columns - spot.column) < newShip.getShipLength())
+		if ((columns - spot.getColumn()) < newShip.getShipLength())
 			return 0;	// Ship will not fit, not enough horizontal room
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * spot.row + spot.column + i] = HAS_SHIP;
+				board_data[columns * spot.getRow() + spot.getColumn() + i] = HAS_SHIP;
 			}
 		}
 	}
 
 	else if (orientation == WEST)
 	{
-		if (spot.column < newShip.getShipLength())
+		if (spot.getColumn() < newShip.getShipLength())
 			return 0;	// Ship will not fit
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * spot.row + spot.column - i] = HAS_SHIP;
+				board_data[columns * spot.getRow() + spot.getColumn() - i] = HAS_SHIP;
 			}
 		}
 	}
@@ -154,10 +150,10 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 
 Board& Board::operator= ( const Board& orig )
 {
-	Location size;
+	Location size();
 	size = orig.getBoardSize();
-	rows = size.row;
-	columns = size.column;
+	rows = size.getRow();
+	columns = size.getColumn();
 	delete board_data;
 	delete head;
 	board_data = new int[rows * columns];
@@ -165,9 +161,7 @@ Board& Board::operator= ( const Board& orig )
 	{
 		for (int j = 0; j < columns; ++j)
 		{
-			Location loc;
-			loc.row = i;
-			loc.column = j;
+			Location loc( i, j );
 			board_data[columns * i + j] = orig.getSpotValue( loc );	// Copy the board_data
 		}
 	}
@@ -182,7 +176,7 @@ Board& Board::operator= ( const Board& orig )
 bool Board::operator== ( const Board& orig )
 {
 	// Make sure they are the same size
-	if (orig.rows != rows || orig.columns != columns)
+	if (orig.getBoardSize().getRows() != rows || orig.getBoardSize().getColumns() != columns)
 	{
 		return 0;	// They are not equal if they are not the same size
 	}
@@ -192,7 +186,7 @@ bool Board::operator== ( const Board& orig )
 	{
 		for (int j = 0; j < columns; ++j)
 		{
-			if (this->getSpotValue( i, j ) != orig.getSpotValue( i, j ))
+			if (this->getSpotValue( Location( i, j )) != orig.getSpotValue( Location( i, j ) ))
 				return 0;
 
 		}

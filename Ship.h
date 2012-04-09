@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Board.h"
+#include "Location.h"
 
 // Defines for Ship Type
 #define	PT_BOAT 1
@@ -70,7 +71,7 @@ public:
 	int getSpotStatus( int location );
 
 private:
-	Location whereAmI;	// Board location of the aft of the ship
+	Location myLoc;	// Location of aft of ship
 	int myId;
 	int myLength;	// Based on shipType
 	int *myParts;	// Hold the status of each part of the ship, this is an array of length, myLength

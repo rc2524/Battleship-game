@@ -7,10 +7,8 @@
 // Constructors
 Ship::Ship()	// Default  constructor will create a PT boat located at the top left of the screen facing to the right.
 {
-	Location newLoc;
-	newLoc.row    = 0;
-	newLoc.column = 0;
-	whereAmI = newLoc;
+	Location newLoc( 0, 0 );
+	myLoc = newLoc;
 	myId = PT_BOAT;
 	myLength = 2;
 	myParts = new int[2];
@@ -22,10 +20,8 @@ Ship::Ship()	// Default  constructor will create a PT boat located at the top le
 
 Ship::Ship( shipType Id )
 {
-	Location newLoc;
-	newLoc.row = 0;
-	newLoc.column = 0;
-	whereAmI = newLoc;
+	Location newLoc( 0, 0 );
+	myLoc = newLoc;
 	myId = Id;
 
 	if (myID == PT_BOAT)
@@ -54,7 +50,7 @@ Ship::Ship( shipType Id )
 
 Ship::Ship( const Ship& orig )
 {
-	whereAmI = orig.getLocation();
+	myLoc = orig.getLocation();
 	myId = orig.getShipType();
 	myLength = orig.getShipLength();
 	myParts = new int[myLength];
@@ -66,7 +62,7 @@ Ship::Ship( const Ship& orig )
 
 Ship& Ship::operator= ( const Ship& orig )
 {
-	whereAmI = orig.getLocation();
+	myLoc = orig.getLocation();
 	myId = orig.getShipType();
 	myLength = orig.getShipLength();
 	delete myParts;
@@ -79,7 +75,7 @@ Ship& Ship::operator= ( const Ship& orig )
 
 bool Ship::operator== ( const Ship& orig )
 {
-	if (whereAmI != orig.getLocation())
+	if (myLoc != orig.getLocation())
 		return 0;
 	if (myId != orig.getShipType())
 		return 0;
@@ -114,7 +110,7 @@ int Ship::getStatus()
 
 Location Ship::getLocation()
 {
-	return whereAmI;
+	return myLoc;
 }
 
 int Ship::getShipType()
@@ -124,7 +120,7 @@ int Ship::getShipType()
 
 void Ship::setLocation( Location newLoc )
 {
-	whereAmI = newLoc;
+	myLoc = newLoc;
 }
 
 int Ship::getShipLength()
