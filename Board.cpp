@@ -4,7 +4,7 @@
 #include "Board.h"
 #include "Ship.h"
 
-// Constructors
+// Constructor
 Board::Board()
 {
 	rows = 10;
@@ -13,6 +13,7 @@ Board::Board()
 	head = 0;
 }
 
+// Constructor
 Board::Board( int height, int width )
 {
 	rows = height;
@@ -21,6 +22,7 @@ Board::Board( int height, int width )
 	head = 0;
 }
 
+// Copy constructor
 Board::Board( const Board& orig )
 {
 	Location size();
@@ -44,23 +46,28 @@ Board::Board( const Board& orig )
 	}
 }
 
+// Destructor
 Board::~Board()
 {
 	delete board_data;
 	delete head;
 }
 
+// Determines the size of the board
 Location Board::getBoardSize()
 {
 	Location size( rows, columns );
 	return size;
 }
 
+
+// Determines the value of a particular spot
 int getSpotValue( Location spot )
 {
 	return board_data[columns * spot.getRow() + spot.getColumn()];
 }
 
+// Determiens whether or not a ship is present on the particular spot that has been fired upon
 bool Board::recieveShot( Location spot )
 {
 	int spotStat = board_data[columns * spot.getRow() + spot.getColumn()];
@@ -80,7 +87,12 @@ bool Board::recieveShot( Location spot )
 	}
 }
 
+<<<<<<< HEAD
 bool Board::placeShip( Ship& newShip, Location spot, int orientation )
+=======
+// Places a ship at a particular spot with a particular orientation
+bool Board::placeShip( Ship& newShip, Location spot, shipDirection orientation )
+>>>>>>> remotes/zergler/master
 {
 	if (orientation == NORTH)
 	{
@@ -148,6 +160,7 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 	return 1;
 }
 
+// Overloaded operator= for copying instances of a specific board
 Board& Board::operator= ( const Board& orig )
 {
 	Location size();
@@ -173,6 +186,7 @@ Board& Board::operator= ( const Board& orig )
 	}
 }
 
+// Overloaded operator== for determining if two boards are equal
 bool Board::operator== ( const Board& orig )
 {
 	// Make sure they are the same size
@@ -195,7 +209,7 @@ bool Board::operator== ( const Board& orig )
 	// If we get to here, then they are equal
 	return 1;
 }
-
+// Overloaded operator!= for determining if two boards are not equal
 bool Board::operator!= ( const Board& orig )
 {
 	return !(*this == orig);

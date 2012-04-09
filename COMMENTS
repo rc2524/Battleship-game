@@ -2,8 +2,7 @@ You pretty much covered everything for board and ship pretty well.
 Maybe there was a comment but I missed it, but is shipDirection supposed to help with
 how to place the ship on the board? And location is meant to be the back of the ship?
 
-Are there default sizes for these ships? Should they be hardcoded with #define
-statements?
+Are there default sizes for these ships? Should they be hardcoded with #define statements?
 
 
 -Yes, the files have been updated further, but shipDirection is used when placing ships and is stored for each ship.
