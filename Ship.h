@@ -5,6 +5,19 @@
 
 #include "Board.h"
 
+// Defines for Ship Type
+#define	PT_BOAT 1
+#define	DESTROYER 2
+#define	SUBMARINE 3
+#define	BATTLESHIP 4
+#define	CARRIER 5
+
+// Defines for direction
+#define	NORTH 1
+#define	SOUTH 2 
+#define	EAST 3
+#define	WEST 4
+
 // Defines for ship length
 #define PT_LENGTH 2
 #define DESTROYER_LENGTH 3
@@ -12,28 +25,11 @@
 #define BATTLESHIP_LENGTH 4
 #define CARRIER_LENGTH 5
 
-enum shipDirection
-{
-	north,
-	south,
-	east,
-	west
-};
-
-enum shipType
-{
-	PT_Boat,
-	Destroyer,
-	Submarine,
-	Battleship,
-	Carrier
-};
-
 class Ship
 {
 public:
 	Ship();		// Default constructor
-	Ship( shipType Id );		// Constructor with shipType
+	Ship( int Id );		// Constructor with shipType
 	Ship( const Ship& orig);	// Copy constructor
 
 	// Overload operators
@@ -46,8 +42,8 @@ public:
 	// Processes the ship getting hit.
 	// Updates ship status based on new hit.
 	// Return 0 if ship is still floating, 1 if ship is sunk
-	// location is the number of spaces from the aft of the ship to the spot that was hit.
-	bool recieveHit( int location );
+	// loc is the number of spaces from the aft of the ship to the spot that was hit.
+	bool recieveHit( int loc );
 
 	// Returns the number of spot on the ship that have not been hit.  Thus, 0 means the ship is sunk.
 	int getStatus();
@@ -56,7 +52,7 @@ public:
 	Location getLocation();
 
 	// Return the ship type
-	shipType getShipType();
+	int getShipType();
 
 	// Set the ship location
 	void setLocation( Location newLoc );
@@ -65,19 +61,19 @@ public:
 	int getShipLength();
 
 	// Return the ship direction
-	shipDirection getDirection();
+	int getDirection();
 
 	// Set the ship direction
-	void setDirection( shipDirection newDir );
-
+	void setDirection( int newDir );
+	
 	// Return status of a single spot on ship
 	int getSpotStatus( int location );
 
 private:
 	Location whereAmI;	// Board location of the aft of the ship
-	shipType myId;
+	int myId;
 	int myLength;	// Based on shipType
-	int *myParts;	// Hold the status of each part of the ship, this is an array of length, myLength.  0 is ok, 1 is hit
+	int *myParts;	// Hold the status of each part of the ship, this is an array of length, myLength
 	bool amISunk;
-	shipDirection facing;	// The direction the ship is facing.
+	int facing;	// The direction the ship is facing.
 };

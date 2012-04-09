@@ -11,13 +11,13 @@ Ship::Ship()	// Default  constructor will create a PT boat located at the top le
 	newLoc.row    = 0;
 	newLoc.column = 0;
 	whereAmI = newLoc;
-	myId = shipType.PT_Boat;
+	myId = PT_BOAT;
 	myLength = 2;
 	myParts = new int[2];
 	myParts[0] = 0;
 	myParts[1] = 0;
 	amISunk = 0;
-	facing = shipDirection.east;	// I choose this so the ship can fit on the board with its current stats
+	facing = EAST;	// I choose this so the ship can fit on the board with its current stats
 }
 
 Ship::Ship( shipType Id )
@@ -28,15 +28,15 @@ Ship::Ship( shipType Id )
 	whereAmI = newLoc;
 	myId = Id;
 
-	if (myID == shipType.PT_Boat)
+	if (myID == PT_BOAT)
 		myLength = PT_LENGTH;
-	else if(myId == shipType.Destroyer)
+	else if(myId == DESTROYER)
 		myLength = DESTROYER_LENGTH;
-	else if(myId == shipType.Submarine)
+	else if(myId == SUBMARINE)
 		myLength = SUBMARINE_LENGTH;
-	else if(myId == shipType.Battleship)
+	else if(myId == BATTLESHIP)
 		myLength = BATTLESHIP_LENGTH;
-	else if(myId == shipType.Carrier)
+	else if(myId == CARRIER)
 		myLength = CARRIER_LENGTH;
 	else
 	{
@@ -49,7 +49,7 @@ Ship::Ship( shipType Id )
 		myParts[i] = 0;
 
 	amISunk = 0;
-	facing = shipDirection.east;
+	facing = EAST;
 }
 
 Ship::Ship( const Ship& orig )
@@ -117,7 +117,7 @@ Location Ship::getLocation()
 	return whereAmI;
 }
 
-shipType Ship::getShipType()
+int Ship::getShipType()
 {
 	return myId;
 }
@@ -132,12 +132,12 @@ int Ship::getShipLength()
 	return myLength;
 }
 
-shipDirection Ship::getDirection()
+int Ship::getDirection()
 {
 	return facing;
 }
 
-void Ship::setDirection( shipDirection newDir )
+void Ship::setDirection( int newDir )
 {
 	facing = newDir;
 }

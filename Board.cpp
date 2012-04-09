@@ -60,7 +60,7 @@ Location Board::getBoardSize()
 	return size;
 }
 
-spotStatus getSpotValue( Location spot )
+int getSpotValue( Location spot )
 {
 	return board_data[columns * spot.row + spot.column];
 }
@@ -68,14 +68,14 @@ spotStatus getSpotValue( Location spot )
 bool Board::recieveShot( Location spot )
 {
 	int spotStat = board_data[columns * spot.row + spot.column];
-	if (spotStat == spotStatus.hasShip)
+	if (spotStat == HAS_SHIP)
 	{
-		board_data[columns * spot.row + spot.column] = spotStatus.beenShotHasShip;
+		board_data[columns * spot.row + spot.column] = BEEN_SHOT_HAS_SHIP;
 		return 1;
 	}
-	else if (spotStat == spotStatus.empty)
+	else if (spotStat == EMPTY)
 	{
-		board_data[columns * spot.row + spot.column] = spotStatus.beenShotEmpty;
+		board_data[columns * spot.row + spot.column] = BEEN_SHOT_EMPTY;
 		return 0;
 	}
 	else
@@ -84,9 +84,9 @@ bool Board::recieveShot( Location spot )
 	}
 }
 
-bool Board::placeShip( Ship& newShip, Location spot, shipDirection orientation )
+bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 {
-	if (orientation == shipDirection.north)
+	if (orientation == NORTH)
 	{
 		if (spot.row < newShip.getShipLength())
 			return 0;	// Ship will not fit, not enough vertical room
@@ -94,12 +94,12 @@ bool Board::placeShip( Ship& newShip, Location spot, shipDirection orientation )
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * (spot.row - i) + spot.column] = spotStatus.hasShip;
+				board_data[columns * (spot.row - i) + spot.column] = HAS_SHIP;
 			}
 		}
 	}
 
-	else if (orientation == shipDirection.south)
+	else if (orientation == SOUTH)
 	{
 		if ((rows - spot.row) < newShip.getShipLength())
 			return 0;	// Ship will not fit.
@@ -107,14 +107,14 @@ bool Board::placeShip( Ship& newShip, Location spot, shipDirection orientation )
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * (spot.row + i) + spot.column] = spotStatus.hasShip;
+				board_data[columns * (spot.row + i) + spot.column] = HAS_SHIP;
 			}
 			newShip.setLocation( spot );
 			newShip.setDirection( orientation );
 		}
 	}
 
-	else if (orientation == shipDirection.east)
+	else if (orientation == EAST)
 	{
 		if ((columns - spot.column) < newShip.getShipLength())
 			return 0;	// Ship will not fit, not enough horizontal room
@@ -122,12 +122,12 @@ bool Board::placeShip( Ship& newShip, Location spot, shipDirection orientation )
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * spot.row + spot.column + i] = spotStatus.hasShip;
+				board_data[columns * spot.row + spot.column + i] = HAS_SHIP;
 			}
 		}
 	}
 
-	else if (orientation == shipDirection.west)
+	else if (orientation == WEST)
 	{
 		if (spot.column < newShip.getShipLength())
 			return 0;	// Ship will not fit
@@ -135,7 +135,7 @@ bool Board::placeShip( Ship& newShip, Location spot, shipDirection orientation )
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
-				board_data[columns * spot.row + spot.column - i] = spotStatus.hasShip;
+				board_data[columns * spot.row + spot.column - i] = HAS_SHIP;
 			}
 		}
 	}
