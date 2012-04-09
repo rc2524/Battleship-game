@@ -87,12 +87,8 @@ bool Board::recieveShot( Location spot )
 	}
 }
 
-<<<<<<< HEAD
+
 bool Board::placeShip( Ship& newShip, Location spot, int orientation )
-=======
-// Places a ship at a particular spot with a particular orientation
-bool Board::placeShip( Ship& newShip, Location spot, shipDirection orientation )
->>>>>>> remotes/zergler/master
 {
 	if (orientation == NORTH)
 	{
