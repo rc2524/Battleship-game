@@ -9,7 +9,7 @@ public:
 	// Constructor
 	Location( );		// Default constructor
 	Location( int nRow, int nColumn );	// Better constructor
-	Location( Location& orig );		// Copy constructor
+	Location( const Location& orig );		// Copy constructor
 	
 	~Location( );	// Destructor
 	
@@ -21,8 +21,8 @@ public:
 	
 	Location& operator= ( const Location& orig );	// Overload '=' operator
 	
-	Location& operator== ( const Location& orig );
-	Location& operator!= ( const Location& orig );
+	bool operator== ( const Location& orig );
+	bool operator!= ( const Location& orig );
 	
 private:
 	int row;	// Holds the row

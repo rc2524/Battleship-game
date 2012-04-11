@@ -15,7 +15,7 @@ Location::Location( int nRow, int nColumn )	// Better constructor
 	column = nColumn;
 }
 
-Location::Location( Location& orig )	// Copy constructor
+Location::Location( const Location& orig )	// Copy constructor
 {
 	row = orig.getRow();
 	column = orig.getColumn();
@@ -52,7 +52,7 @@ Location& Location::operator= ( const Location& orig )
 	column = orig.getColumn();
 }
 
-Location& Location::operator== ( const Location& orig )
+bool Location::operator== ( const Location& orig )
 {
 	if (orig.getColumn != column)
 		return 0;
@@ -63,7 +63,7 @@ Location& Location::operator== ( const Location& orig )
 	return 1;
 }
 
-Location& Location::operator!= ( const Location& orig )
+bool Location::operator!= ( const Location& orig )
 {
 	return !(*this == orig);
 }

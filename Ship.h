@@ -47,28 +47,28 @@ public:
 	bool recieveHit( int loc );
 
 	// Returns the number of spot on the ship that have not been hit.  Thus, 0 means the ship is sunk.
-	int getStatus();
+	int getStatus() const;
 
 	// Return the location of the aft of the ship
-	Location getLocation();
+	Location getLocation() const;
 
 	// Return the ship type
-	int getShipType();
+	int getShipType() const;
 
 	// Set the ship location
 	void setLocation( Location newLoc );
 
 	// Return ship Length
-	int getShipLength();
+	int getShipLength() const;
 
 	// Return the ship direction
-	int getDirection();
+	int getDirection() const;
 
 	// Set the ship direction
 	void setDirection( int newDir );
 	
 	// Return status of a single spot on ship
-	int getSpotStatus( int location );
+	int getSpotStatus( int location ) const;
 
 private:
 	Location myLoc;	// Location of aft of ship

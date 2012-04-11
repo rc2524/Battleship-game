@@ -18,13 +18,13 @@ Ship::Ship()	// Default  constructor will create a PT boat located at the top le
 	facing = EAST;	// I choose this so the ship can fit on the board with its current stats
 }
 
-Ship::Ship( shipType Id )
+Ship::Ship( int Id )
 {
 	Location newLoc( 0, 0 );
 	myLoc = newLoc;
 	myId = Id;
 
-	if (myID == PT_BOAT)
+	if (myId == PT_BOAT)
 		myLength = PT_LENGTH;
 	else if(myId == DESTROYER)
 		myLength = DESTROYER_LENGTH;
@@ -84,9 +84,9 @@ bool Ship::operator== ( const Ship& orig )
 	for (int i = 0; i < myLength; ++i)
 		if (myParts[i] != getSpotStatus(i))
 			return 0;
-	if (amISunk != !(orig.getStatus())
+	if (amISunk != !(orig.getStatus()))
 		return 0;
-	if (facing != orig.getShipDirection())
+	if (facing != orig.getDirection())
 		return 0;
 
 	// If it gets this far then they are equal
@@ -98,7 +98,7 @@ bool Ship::operator!= ( const Ship& orig )
 	return !(*this == orig);
 }
 
-int Ship::getStatus()
+int Ship::getStatus() const
 {
 	int count = 0;
 	for (int i = 0; i < myLength; ++i)
@@ -108,12 +108,12 @@ int Ship::getStatus()
 	return count;
 }
 
-Location Ship::getLocation()
+Location Ship::getLocation() const
 {
 	return myLoc;
 }
 
-int Ship::getShipType()
+int Ship::getShipType() const
 {
 	return myId;
 }
@@ -123,12 +123,12 @@ void Ship::setLocation( Location newLoc )
 	myLoc = newLoc;
 }
 
-int Ship::getShipLength()
+int Ship::getShipLength() const
 {
 	return myLength;
 }
 
-int Ship::getDirection()
+int Ship::getDirection() const
 {
 	return facing;
 }
