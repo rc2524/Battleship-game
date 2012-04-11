@@ -50,13 +50,13 @@ Board::~Board()
 	delete head;
 }
 
-Location Board::getBoardSize()
+Location Board::getBoardSize() const 
 {
 	Location size( rows, columns );
 	return size;
 }
 
-int getSpotValue( Location spot )
+int getSpotValue( Location spot ) const
 {
 	return board_data[columns * spot.getRow() + spot.getColumn()];
 }
@@ -176,7 +176,7 @@ Board& Board::operator= ( const Board& orig )
 bool Board::operator== ( const Board& orig )
 {
 	// Make sure they are the same size
-	if (orig.getBoardSize().getRows() != rows || orig.getBoardSize().getColumns() != columns)
+	if (orig.getBoardSize().getRow() != rows || orig.getBoardSize().getColumn() != columns)
 	{
 		return 0;	// They are not equal if they are not the same size
 	}
