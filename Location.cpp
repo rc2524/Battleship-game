@@ -50,13 +50,15 @@ Location& Location::operator= ( const Location& orig )
 {
 	row = orig.getRow();
 	column = orig.getColumn();
+
+	return *this;
 }
 
 bool Location::operator== ( const Location& orig )
 {
-	if (orig.getColumn != column)
+	if (orig.getColumn() != column)
 		return 0;
-	if (orig.getRow != row)
+	if (orig.getRow() != row)
 		return 0;
 	
 	// If we get here, they are equal	

@@ -71,6 +71,8 @@ Ship& Ship::operator= ( const Ship& orig )
 		myParts[i] = orig.getSpotStatus(i);
 	amISunk = !(orig.getStatus());
 	facing = orig.getDirection();
+
+	return *this;
 }
 
 bool Ship::operator== ( const Ship& orig )
@@ -150,4 +152,9 @@ bool Ship::recieveHit( int loc )
 		amISunk = 1;
 		return 1;
 	}
+}
+
+int Ship::getSpotStatus( int loc ) const
+{
+	return myParts[loc];
 }
