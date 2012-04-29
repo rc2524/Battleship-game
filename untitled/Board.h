@@ -60,6 +60,7 @@ public:
 	bool operator== ( const Board& orig );
 
 private:
+        int numOfShips; //Added
 	int rows, columns;
 	int *board_data;
 	shipNode *head;

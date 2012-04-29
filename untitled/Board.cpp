@@ -25,6 +25,7 @@ std::ostream& operator<< (std::ostream& out, Board& b)
 // Constructor
 Board::Board()
 {
+        numOfShips = 0;
 	rows = 10;
 	columns = 10;
 	board_data = new int[100]; // New matrix to hold the spot values. Length = rows * columns
@@ -38,6 +39,7 @@ Board::Board()
 // Constructor
 Board::Board( int height, int width )
 {
+        numOfShips = 0;
 	rows = height;
 	columns = width;
 	board_data = new int[rows * columns];
@@ -177,6 +179,7 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 	newNode->data = myShip;
 	newNode->next = head;
 	head = newNode;
+        numOfShips++;
 	return 1;
 }
 
