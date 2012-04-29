@@ -19,7 +19,10 @@ HEADERS += chatdialog.h \
     battlenetworkgame.h \
     battleaigame.h \
     battlelocalgame.h \
-    InitialWindow.h
+    InitialWindow.h \
+    Ship.h \
+    Location.h \
+    Board.h
 FORMS += chatdialog.ui InitialWindow.ui \
     battlenetworkwindow.ui \
     battlenetworkgame.ui \
@@ -36,4 +39,7 @@ SOURCES += chatdialog.cpp \
     battlenetworkgame.cpp \
     battleaigame.cpp \
     battlelocalgame.cpp \
-    InitialWindow.cpp
+    InitialWindow.cpp \
+    Ship.cpp \
+    Location.cpp \
+    Board.cpp

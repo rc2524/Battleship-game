@@ -48,7 +48,7 @@
          }
      }
 
-     ChatDialog dialog;
+     //ChatDialog dialog;
      InitialWindow window;
 
  #ifdef Q_OS_SYMBIAN
