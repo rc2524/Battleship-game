@@ -55,7 +55,7 @@ int main()
 	
 	spot.setRow( 5 );
 	spot.setColumn( 3 );
-	newBoard.placeShip( Minow, spot, WEST);
+	newBoard.placeShip( Minow, spot, SOUTH);
 
 	cout << "Spot value at (5,3) = " << newBoard.getSpotValue( spot ) << endl;
 
@@ -63,6 +63,8 @@ int main()
 	spot.setColumn( 9 );
 
 	cout << "Spot value at (9,9) = " << newBoard.getSpotValue( spot ) << endl;
+
+	cout << newBoard;
 
 	return 0;
 }

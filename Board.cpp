@@ -6,6 +6,22 @@
 
 #define DBG 1
 
+// Overload the output operator
+std::ostream& operator<< (std::ostream& out, Board& b)
+{	// Output the board
+	for (int i = 0; i < b.getBoardSize().getRow(); ++i)
+	{
+		for (int j = 0; j < b.getBoardSize().getColumn(); ++j)
+		{
+			Location newLoc(i,j);
+			out << b.getSpotValue(newLoc) << " ";
+		}
+		out << "\n";
+	}
+
+	return out;
+}
+
 // Constructor
 Board::Board()
 {
