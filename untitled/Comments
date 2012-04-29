@@ -1,0 +1,9 @@
+Jacob Lubben comments:
+
+In bool Board::placeShip:
+Work off of exclusively 2 orientations, north and east. Then you should be able to just work with negatives for more condensed code.
+
+In Board.h Ship.h:
+Everything should be contained inside a class. You have structs outside. Fix that.
+
+Other than that, it seemed like clear and concise code.

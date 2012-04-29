@@ -72,7 +72,7 @@ Location Board::getBoardSize() const
 
 
 // Determines the value of a particular spot
-int Board::getSpotValue( Location& spot ) const
+int Board::getSpotValue( Location spot ) const
 {
 	return board_data[columns * spot.getRow() + spot.getColumn()];
 }

@@ -1,0 +1,16 @@
+You pretty much covered everything for board and ship pretty well.
+Maybe there was a comment but I missed it, but is shipDirection supposed to help with
+how to place the ship on the board? And location is meant to be the back of the ship?
+
+Are there default sizes for these ships? Should they be hardcoded with #define statements?
+
+
+-Yes, the files have been updated further, but shipDirection is used when placing ships and is stored for each ship.
+
+-The location is the back of the ship.
+
+-I was thinking the ship sizes would be stored in some external file and read by main in case someone wanted to mod the game
+ but we can hard code them if you guys want. **** SEE UPDATE 1 ****
+
+**** UPDATE 1 ****
+Upon further review, I decided that you were correct, and I added the ship lengths into Ship.h as #define's
