@@ -1,6 +1,7 @@
 #include <QApplication>
 
  #include "chatdialog.h"
+#include "InitialWindow.h"
 
  #include <QtCore/QSettings>
  #include <QtNetwork/QNetworkConfigurationManager>
@@ -48,11 +49,14 @@
      }
 
      ChatDialog dialog;
+     InitialWindow window;
+
  #ifdef Q_OS_SYMBIAN
      // Make application better looking and more usable on small screen
-     dialog.showMaximized();
+    // dialog.showMaximized();
  #else
-     dialog.show();
+  //   dialog.show();
+     window.show();
  #endif
      return app.exec();
  }

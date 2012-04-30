@@ -88,7 +88,7 @@ Location Board::getBoardSize() const
 
 
 // Determines the value of a particular spot
-int Board::getSpotValue( Location& spot ) const
+int Board::getSpotValue( Location spot ) const
 {
 	return board_data[columns * spot.getRow() + spot.getColumn()];
 }
@@ -123,6 +123,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * (spot.getRow() - i) + spot.getColumn()] == HAS_SHIP)
+					return 0;
+			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * (spot.getRow() - i) + spot.getColumn()] = HAS_SHIP;
 			}
@@ -135,6 +138,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 			return 0; // Ship will not fit.
 		else
 		{
+			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * (spot.getRow() + i) + spot.getColumn()] == HAS_SHIP)
+					return 0;
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * (spot.getRow() + i) + spot.getColumn()] = HAS_SHIP;
@@ -149,6 +155,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * spot.getRow() + i + spot.getColumn()] == HAS_SHIP)
+					return 0;
+			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * spot.getRow() + spot.getColumn() + i] = HAS_SHIP;
 			}
@@ -161,6 +170,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 			return 0; // Ship will not fit
 		else
 		{
+			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * spot.getRow() - i + spot.getColumn()] == HAS_SHIP)
+					return 0;
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * spot.getRow() + spot.getColumn() - i] = HAS_SHIP;
