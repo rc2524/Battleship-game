@@ -26,5 +26,5 @@ public:
 	
 private:
 	int row;	// Holds the row
-	int cloumn;	// Holds the column	
+	int column;	// Holds the column	
 };
