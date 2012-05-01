@@ -18,6 +18,8 @@ std::ostream& operator<< (std::ostream& out, Board& b)
 		}
 		out << "\n";
 	}
+	
+	out << head << "\n";
 
 	return out;
 }
