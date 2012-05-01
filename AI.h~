@@ -19,12 +19,9 @@ class AI {
 	// Update board
 	friend std::istream& operator>> (std::istream& in, AI& ai);
 	
-	// Gets the curent state of the board, ie: where has already been guessed
-	// Note: Call before each guess
 	void input_status(const Board& b);
 
 	// Location of guess
-	// Prerequisite: input_status(const Board&) must be called before each guess
 	Location guess();
 
 private:
