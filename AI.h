@@ -29,9 +29,8 @@ private:
 	// Returns the size of the smallest ship not already destroyed
 	int smallestShipLeft() const;
 	
-	// Returns location of ship that is partially destroyed
-	Location unfinishedShip() const;
-
+	// adds options for guessing
+	void add_guess_options();
 
 	// ----- Data Members -----
 	static const int num_of_strats_availible = 2;
@@ -45,14 +44,11 @@ private:
 	// Vector of spots to still guess
 	std::vector<Location> guess_options;
 
-	// Array of which ships are destroyed
-	int ships_left[5];
-
 	// The array of the board
 	std::vector< std::vector<int> > board;
 	int height0;
 	int width0;	
 	
 	// Number of hits on ships that are not complete sunk
-	int unsunken_hits;
+	bool unsunken_ship_hit;
 };

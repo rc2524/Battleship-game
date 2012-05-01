@@ -4,20 +4,16 @@
 #include <ctime>
 #include <algorithm>
 #include "AI.h"
-//#include "Location.h"
+#include "Location.h"
+#include "Board.h"
 
 AI::AI(const int width1, const int height1) :
   height0(height1),
   width0(height1),
-  unsunken_hits(0)
+  unsunken_ship_hit(false)
 {
 	// Initialize the board to keep track of guesses
 	board.resize(height0, std::vector<int>(width0, EMPTY) );
-	
-	// Set all the ships to still alive
-	for (int i = 0; i<5; ++i) {
-		ships_left[i] = i+1;
-	}
 	
 	// Random seed
 	std::srand(std::time(0));
@@ -31,49 +27,116 @@ AI::~AI() {
 
 }
 
-int AI::smallestShipLeft() const {
-	int smallest = 5;
-
-	for (int i = 0; i < 5; ++i) {
-		smallest = (ships_left[i] < smallest ? ships_left[i] : smallest);
-	}
-
-	return smallest;
-}
-
 std::istream& operator>> (std::istream& in, AI& ai) {
+	// Input board data
 	for (int i = 0; i < ai.height0; ++i) {
 		for (int j = 0; j < ai.width0; ++j) {
 			// Input the status of the location
 			in >> ai.board[i][j];
+			if (ai.board[i][j] == HAS_SHIP)
+				ai.board[i][j] = EMPTY;		// Forget where ships are
 			
-			// Add to the array of guessable spaces
-			if (ai.board[i][j] == EMPTY) {
-				if (
-					(ai.guess_strat == ai.EVEN_SPACES && ((i+j)%2 == 0)) ||
-					(ai.guess_strat == ai.ODD_SPACES  && ((i+j)%2 == 1))
-					)
-				{
-					Location empty_space(i,j);
-					ai.guess_options.push_back(empty_space);
-				}
-			}
+			
 		}
 	}
+	
+	
+	// Input ship data and mark all completely sunken ships
+	long unsigned int p;
+	in >> p;
+	for (const shipNode* pShip = (shipNode*)p; pShip; pShip = pShip->next) {
+		if ( pShip->data.getStatus() == 0 ) { // Ship is sunk
+			// Mark location of sunken ships
+			int ship_row = pShip->data.getLocation().getRow();
+			int ship_column = pShip->data.getLocation().getColumn();
+			for (int n; n < pShip->data.getShipLength(); ++n) {
+				switch (pShip->data.getDirection()) { 
+				  case NORTH:
+				  	ai.board[ship_row + n][ship_column] = 2;
+				  	break;
+				  case SOUTH:
+					ai.board[ship_row - n][ship_column] = 2;
+					break;
+				  case EAST:
+				  	ai.board[ship_row][ship_column + n] = 2;
+				  	break;
+				  case WEST:
+					ai.board[ship_row][ship_column - n] = 2;
+					break;
+				}
+			}
+		}	
+	}
+	
+	// Add all the good guessing options to a vector
+	ai.add_guess_options();
 	
 	return in;
 }
 
-
-
-Location AI::guess() {
-	// If there is an unfinished ship, attempt to finish it off.
-	/* WORK ON THIS AFTER WAY INPUT IF SHIPS ARE DESTROYED */
-	if (unsunken_hits) {
-		// return statment in here
+void AI::add_guess_options() {
+	unsunken_ship_hit = false;
+	guess_options.clear();
+	
+	// Look for an unfinished ship, if there is one guess around it.
+	for (int i; i<height0; ++i) {
+		for (int j; j<width0; ++j) {
+			
+			if (board[i][j] == BEEN_SHOT_HAS_SHIP) {
+				unsunken_ship_hit = true;
+				
+				// Add 4 spots around hit if within the board
+				if (i+1 < height0) {
+					if (board[i+1][j] == EMPTY) {
+						Location empty_space(i+1,j);
+						guess_options.push_back(empty_space);
+					}
+				}
+				if (i-1 >= 0) {
+					if (board[i-1][j] == EMPTY) {
+						Location empty_space(i-1,j);
+						guess_options.push_back(empty_space);
+					}
+				}
+				if (j+1 < width0) {
+					if (board[i][j+1] == EMPTY) {
+						Location empty_space(i,j+1);
+						guess_options.push_back(empty_space);
+					}
+				}
+				if (j-1 >=0) {
+					if (board[i][j-1] == EMPTY) {
+						Location empty_space(i,j-1);
+						guess_options.push_back(empty_space);
+					}
+				}
+					
+			}
+		}
 	}
 	
-	// If there is no unfinished ship, just guess
+	// If no unfinished ship guess randomly in a chekerboard pattern
+	if (!unsunken_ship_hit) {
+		for (int i; i<height0; ++i) {
+			for (int j; j<width0; ++j) {
+				// Add spaces in a checkerboard pattern to guessable spaces
+				if (board[i][j] == EMPTY) {
+					if (
+						(guess_strat == EVEN_SPACES && ((i+j)%2 == 0)) ||
+						(guess_strat == ODD_SPACES  && ((i+j)%2 == 1))
+						)
+					{
+						Location empty_space(i,j);
+						guess_options.push_back(empty_space);
+					}
+				}
+			}
+		}
+	}
+}
+
+Location AI::guess() {
+	// Select a random choice from the list of good guesses
 	std::random_shuffle ( guess_options.begin(), guess_options.end() );
 	
 	return guess_options.back();

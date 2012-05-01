@@ -1,5 +1,5 @@
 #include "AI.h"
-//#include "Location.h"
+#include "Location.h"
 #include <iostream>
 
 int main() {
