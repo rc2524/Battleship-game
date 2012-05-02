@@ -129,6 +129,59 @@ void BattleAIGame::nextTurn(){
     }
 }
 
+void BattleAIGame::sunkShip(){
+    shipNode* pShip;
+    if (PlayerTurn == true)
+       pShip = AIBoard->getShipLinkedList();
+    else
+        pShip = PlayerBoard->getShipLinkedList();
+    for (; pShip; pShip = pShip->next) {
+               cout<<pShip->data.getStatus()<<endl;
+        if ( pShip->data.getStatus() == 0 ) { // Ship is sunk
+            cout<<"sunkenship"<<endl;
+            if(PlayerTurn == true){
+                switch (pShip->data.getShipType()){
+                    case 1:
+                    ui->Enemy_Pt->setText("<s>Patrol Boat</s>");
+                       break;
+                   case 2:
+                    ui->Enemy_Des->setText("<s>Destroyer</s> ");
+                       break;
+                    case 3:
+                       ui->Enemy_Sub->setText("<s>Submarine</s> ");
+                       break;
+                    case 4:
+                       ui->Enemy_Bat->setText("<s>Battleship</s> ");
+                       break;
+                    case 5:
+                       ui->Enemy_Car->setText("<s>Carrier</s> ");
+                       break;
+            }
+        }
+           else{
+               switch (pShip->data.getShipType()){
+                   case 1:
+                      ui->Enemy_Pt->setText("<s>Patrol Boat</s>");
+                      break;
+                   case 2:
+                      ui->Player_Des->setText("<s>Destroyer</s>");
+                      break;
+                   case 3:
+                      ui->Player_Sub->setText("<s>Submarine</s>");
+                      break;
+                   case 4:
+                      ui->Player_Bat->setText("<s>Battleship</s>");
+                      break;
+                   case 5:
+                      ui->Player_Car->setText("<s>Carrier</s>");
+                      break;
+            }
+
+            }
+        }
+    }
+}
+
 bool BattleAIGame::checkGame(){
     return EnemyBoard->gameStatus();
 }
@@ -179,6 +232,7 @@ void BattleAIGame::fire(){
         QMessageBox::information(this, tr("Status: HIT"),
                                  tr("HIT at coordinate ")+ QString::number(firePos.getRow())
                                  +"," + QString::number(firePos.getColumn()));
+        sunkShip();
     }
     else
         QMessageBox::information(this, tr("Status: MISS"),
@@ -198,7 +252,6 @@ void BattleAIGame::fire(){
 
 void BattleAIGame::printBoardText(Board* boardToPrint, QTextBrowser *textbox, bool showAll ){
     QString str;
-    QString tempStr;
     int val;
     testOut.clear();
     for (int i = 0; i < (boardToPrint->getBoardSize().getRow()+1); ++i) {

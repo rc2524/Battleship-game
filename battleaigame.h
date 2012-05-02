@@ -38,7 +38,6 @@ private:
     Board* AIBoard;
     Board* EnemyBoard;
     QString testOut;
-    void sunkShip();
     bool checkGame();
     void nextTurn();
     void AIMove();

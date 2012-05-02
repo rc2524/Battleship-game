@@ -190,99 +190,57 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>75</width>
-     <height>241</height>
+     <x>11</x>
+     <y>71</y>
+     <width>94</width>
+     <height>17</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="EnemyShips">
-    <item>
-     <widget class="QLabel" name="Enemy_Pt">
-      <property name="text">
-       <string>PT_Boat</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Enemy_Des">
-      <property name="text">
-       <string>Destroyer</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Enemy_Sub">
-      <property name="text">
-       <string>Submarine</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Enemy_Bat">
-      <property name="text">
-       <string>Battleship</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Enemy_Car">
-      <property name="text">
-       <string>Carrier</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="text">
+    <string>1 or E = Water</string>
+   </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget_3">
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>60</y>
-     <width>75</width>
-     <height>241</height>
+     <x>11</x>
+     <y>94</y>
+     <width>80</width>
+     <height>17</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="PlayerShips">
-    <item>
-     <widget class="QLabel" name="Player_Pt">
-      <property name="text">
-       <string>PT_Boat</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Player_Des">
-      <property name="text">
-       <string>Destroyer</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Player_Sub">
-      <property name="text">
-       <string>Submarine</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Player_Bat">
-      <property name="text">
-       <string>Battleship</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="Player_Car">
-      <property name="text">
-       <string>Carrier</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="text">
+    <string>2 or S = Ship</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>117</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>3 or 0 = Miss</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>140</y>
+     <width>73</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>4 or X = Hit</string>
+   </property>
   </widget>
  </widget>
  <resources/>
