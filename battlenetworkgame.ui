@@ -69,6 +69,12 @@
      <height>27</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
    </property>
@@ -80,7 +86,14 @@
      <string>X:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="FireRowText"/>
+   <widget class="QLineEdit" name="FireRowText">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+   </widget>
    <widget class="QLabel" name="YLabel">
     <property name="text">
      <string>Y:</string>
@@ -89,6 +102,12 @@
    <widget class="QLineEdit" name="FireColText">
     <property name="enabled">
      <bool>true</bool>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
    </widget>
   </widget>
