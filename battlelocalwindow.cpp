@@ -39,6 +39,7 @@ void battleLocalWindow::switchPlayer(){
 
 void battleLocalWindow::printBoardText(Board* boardToPrint, QTextBrowser *textbox, bool showAll ){
     QString str;
+    QString tempStr;
     int val;
     testOut.clear();
     for (int i = 0; i < (boardToPrint->getBoardSize().getRow()+1); ++i) {
@@ -54,10 +55,30 @@ void battleLocalWindow::printBoardText(Board* boardToPrint, QTextBrowser *textbo
             else{
                 Location newLoc(i-1,j);
                 val = boardToPrint->getSpotValue(newLoc);
-                if(!showAll && (val==2)){
+		if(!showAll && (val==2)){
                     val = 1; //Opponent shouldn't know where ships are
                 }
-                testOut.append(str.setNum(val,10));
+		if(val == 1){
+		    tempStr = "W";
+		    testOut.append(tempStr);
+		}
+		else if(val == 2){
+		    tempStr = "S";
+		    testOut.append(tempStr);
+		}
+		else if(val == 3){
+		    tempStr = "O";
+		    testOut.append(tempStr);
+		}
+		else if(val == 4){
+		    tempStr = "X";
+		    testOut.append(tempStr);
+		}
+		else{
+		   	 //should not make it this far
+		}
+
+                //testOut.append(str.setNum(val,10));  <-used for 			numbers instead of letters.
             }
             testOut.append("  ");
         }
