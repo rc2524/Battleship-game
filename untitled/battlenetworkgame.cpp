@@ -18,7 +18,7 @@ battlenetworkgame::battlenetworkgame(QWidget *parent) :
     connect(&client, SIGNAL(newMessage(QString,QString)), this, SLOT(appendMessage(QString,QString)));
     connect(&client, SIGNAL(participantLeft(QString)), this, SLOT(opponentLeft(QString)));
 //client
-    srand(seed);
+    srand(netseed);
 }
 
 battlenetworkgame::~battlenetworkgame(){
@@ -149,14 +149,13 @@ bool battlenetworkgame::checkGame(){
 void battlenetworkgame::createCustomBoard(){
     //Dialog box for each location/ship/direction
     //update board
-    ui->RandomButton->setEnabled(FALSE);
+    //Needs code
+    QMessageBox::information(this, tr("Status: ERROR"),
+                             tr("Custom Board Creation not available. Please create random board"));
     ui->CustomButton->setEnabled(FALSE);
-    ui->FireButton->setEnabled(TRUE);
-    //Should not make it here
 }
 
 void battlenetworkgame::createRandomBoard(){
-
     ui->RandomButton->setEnabled(FALSE);
     ui->CustomButton->setEnabled(FALSE);
     ui->FireButton->setEnabled(TRUE);

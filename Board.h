@@ -53,14 +53,16 @@ public:
 	// Returns:
 	//  bool : 0 if place unsuccessful, 1 if place successful
 	bool placeShip( Ship& newShip, Location spot, int orientation );
+        bool gameStatus();
 
 	// Overload operators
 	Board& operator= ( const Board& orig );
 	bool operator!= ( const Board& orig );
 	bool operator== ( const Board& orig );
-	shipNode *getShipLinkedList() { return head };
+shipNode *getShipLinkedList() { return head;}
 
 private:
+    int numOfShips; //Added
 	int rows, columns;
 	int *board_data;
 	shipNode *head;

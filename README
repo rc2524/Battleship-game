@@ -1,6 +1,16 @@
 A simple battleship game where a player picks a row and column to "shoot" and the opponant responds by saying "hit" or "miss."  A visual grid is made to help the player remember when he has already guessed.  2 player or player vs computer is still to be decided. both would be ideal.
 
+This current implementation does not have Network Play enabled. Only 2 player or 1 player is working.
+
+
 Board.h : The header file for the board class.  Up to date as of 09 APR 2012.  v1.3	// Done as of now
 Ship.h  : The header file for the ship class.  Up to date as of 09 APR 2012.   v1.3	// Done as of now
 
-Changed all enums to #define's.
+Changed all enums to #define's
+
+Compiling Instructions:
+This program requires QT to be installed.
+Run "make clean" in case there are any extra files that were not made on the current computer
+Run "qmake"
+Run makE
+

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-static int seed = time(NULL);
+static int localseed = time(NULL);
 
 namespace Ui {
     class battleLocalWindow;
@@ -25,8 +25,7 @@ class battleLocalWindow : public QDialog
 public:
     explicit battleLocalWindow(QWidget *parent = 0);
     ~battleLocalWindow();
-    void createPlayer1Board();
-    void createPlayer2Board();
+
     void nextTurn();
 
 private slots:
@@ -47,6 +46,7 @@ private:
     void gameOver();
     bool checkGame(); //Check EnemyBoard
     bool goodCoordinate(int row, int col);
+    void sunkShip();
 };
 
 #endif // BATTLELOCALWINDOW_H

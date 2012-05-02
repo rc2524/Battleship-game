@@ -18,7 +18,7 @@ std::ostream& operator<< (std::ostream& out, Board& b)
 		}
 		out << "\n";
 	}
-
+    
 	return out;
 }
 
@@ -40,6 +40,7 @@ Board::Board( int height, int width )
 {
 	rows = height;
 	columns = width;
+    numOfShips = 0;
 	board_data = new int[rows * columns];
 	for (int i = 0; i < rows * columns; ++i)
 	{
@@ -184,7 +185,7 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 	Ship myShip = newShip;
 	myShip.setLocation( spot );
 	myShip.setDirection( orientation );
-
+    numOfShips++;
 	shipNode *newNode = new shipNode();
 	newNode->data = myShip;
 	newNode->next = head;
