@@ -59,14 +59,16 @@ void BattleNetworkWindow::startNetworkGame(){
     }
     else if(opponentList.size()<1){
         QMessageBox::information(this, tr("Select Opponent"), tr("Please Select an Opponent"));
-
+    }
+    else if(opponentList.at(0)->text() == myNickName){
+        QMessageBox::information(this, tr("Select Opponent"), tr("You can not play yourself. Please Select an Opponent"));
     }
     else{
         battlenetworkgame *NetGame = new battlenetworkgame();
         NetGame->setOpponentName(opponentList.at(0)->text());
+        NetGame->setPlayerName(myNickName);
         NetGame->show();
         this->close();
     }
-
 }
 

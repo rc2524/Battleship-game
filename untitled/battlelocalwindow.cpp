@@ -2,6 +2,7 @@
 #include "ui_battlelocalwindow.h"
 #include "Board.h"
 #include <QMessageBox>
+ #include <QStringBuilder>
 
 battleLocalWindow::battleLocalWindow(QWidget *parent) :
     QDialog(parent),
@@ -19,8 +20,7 @@ battleLocalWindow::battleLocalWindow(QWidget *parent) :
     srand(seed);
 }
 
-battleLocalWindow::~battleLocalWindow()
-{
+battleLocalWindow::~battleLocalWindow(){
     delete ui;
 }
 
@@ -33,8 +33,7 @@ void battleLocalWindow::switchPlayer(){
 
     this->hide(); //Hide DialogBox
     temp.setNum(CurrentPlayer,10);
-    QMessageBox::information(this, tr("Switch Players"),
-                             "Player " + temp + "'s Turn");
+    QMessageBox::information(this, tr("Switch Players"),"Player " + temp + "'s Turn");
     this->show(); //Show DialogBox
 }
 
@@ -70,58 +69,78 @@ void battleLocalWindow::printBoardText(Board* boardToPrint, QTextBrowser *textbo
 
 void battleLocalWindow::nextTurn(){
     switchPlayer();
-    Board* enemyBoard;
-    Board* playerBoard;
     if(CurrentPlayer == 1){
-        enemyBoard =  Player2Board;
-        playerBoard = Player1Board;
+        EnemyBoard  =  Player2Board;
+        PlayerBoard = Player1Board;
     }
     else{
-        enemyBoard =  Player1Board;
-        playerBoard = Player2Board;
+        EnemyBoard  =  Player1Board;
+        PlayerBoard = Player2Board;
     }
-    printBoardText(playerBoard,ui->PlayerGameBoard, TRUE); //Player's Board
-    printBoardText(enemyBoard,ui->OpponentGameBoard, FALSE); //Opponent's Board
+    printBoardText(PlayerBoard,ui->PlayerGameBoard, TRUE); //Player's Board
+    printBoardText(EnemyBoard,ui->OpponentGameBoard, FALSE); //Opponent's Board
 }
 
 void battleLocalWindow::gameOver(){
+//check all ship spots see if all sunk
+    //ALL YOUR BATTLESHIP BELONG TO ME
 
+}
 
+bool battleLocalWindow::goodCoordinate(int row, int col){
+    bool correctRow = (row>=0 && row<=9);
+    bool correctCol = (col>=0 && col<=9 );
+    if(correctRow && correctCol)
+        return TRUE;
+    else
+        return FALSE;
 }
 
 void battleLocalWindow::fire(){
-    int xFire, yFire;
-    Board* enemyBoard;
+    int xFire = ui->FireRowText->text().toInt();
+    int yFire = ui->FireColText->text().toInt();
+    QString playerNum;
 
-    xFire = ui->FireRowText->text().toInt();
-    yFire = ui->FireColText->text().toInt();
-    if(CurrentPlayer==1)
-        enemyBoard = Player2Board;
-    else
-        enemyBoard = Player1Board;
+    if(ui->FireRowText->text() == ""){
+        QMessageBox::information(this, tr("Bad Coordinates"),tr("No X coordinate entered. Please enter valid coordinate"));
+        return;
+    }
+    else if(ui->FireColText->text() == ""){
+        QMessageBox::information(this, tr("Bad Coordinates"), tr("No Y coordinate entered. Please enter valid coordinate"));
+        return;
+    }
+    else if(!goodCoordinate(xFire, yFire)){
+        QMessageBox::information(this, tr("Bad Coordinates"), tr("Bad coordinates entered. Please enter valid coordinates"));
+        return;
+    }
+    if(CurrentPlayer==1){
+        EnemyBoard = Player2Board;
+        playerNum = "1";
+    }
+    else{
+        EnemyBoard = Player1Board;
+        playerNum = "2";
+    }
 
     Location firePos(xFire,yFire);
-    //REPEAT position
-    if(enemyBoard->getSpotValue(firePos) >2)
+    if(EnemyBoard->getSpotValue(firePos) >2){
         QMessageBox::information(this, tr("Status: ERROR"), tr("Attempt to fire on repeat coordinates."));
-    //HIT on position
-    else if(enemyBoard->recieveShot(firePos))
+        return;
+    }
+    else if(EnemyBoard->recieveShot(firePos))
         QMessageBox::information(this, tr("Status: HIT"), tr("HIT!"));
-    //MISS on position
     else
         QMessageBox::information(this, tr("Status: MISS"), tr("MISS!"));
 
-    checkGame(enemyBoard);
+    if(!checkGame()){
+        QMessageBox::information(this, tr("GAME OVER"), "Game over. Player " % playerNum %"Wins");
+        this->close();
+    }
     nextTurn();
 }
 
-bool battleLocalWindow::checkGame(Board *boardIn){
- /*   shipNode *tempNode = new shipNode;
-    while(boardIn->tempNode != NULL){
-        tempNode = boardIn->head->next;
-
-    }
-*/
+bool battleLocalWindow::checkGame(){
+    return EnemyBoard->gameStatus();
 }
 
 void battleLocalWindow::createCustomBoard(){
@@ -181,8 +200,7 @@ void battleLocalWindow::createRandomBoard(){
         PT_spot.setRow(rand()%10);
         PT_direc = rand()%4 + 1; // 1-5
     }
-    cout<<"Patrol(2) "<<PT_spot.getRow()<<","<<PT_spot.getColumn()
-        << " " <<PT_direc<<endl;
+    cout<<"Patrol(2) "<<PT_spot.getRow()<<","<<PT_spot.getColumn() << " " <<PT_direc<<endl;
 
     //Place Destroyer
     Ship Farragut(DESTROYER);
@@ -191,8 +209,7 @@ void battleLocalWindow::createRandomBoard(){
         DES_spot.setRow(rand()%10);
         DES_direc = rand()%4 + 1; // 1-5
     }
-    cout<<"Destroyer(3) "<<DES_spot.getRow()<<","<<DES_spot.getColumn()
-        << " " <<DES_direc<<endl;
+    cout<<"Destroyer(3) "<<DES_spot.getRow()<<","<<DES_spot.getColumn()<< " " <<DES_direc<<endl;
 
 
     //Place Submarine
@@ -202,8 +219,7 @@ void battleLocalWindow::createRandomBoard(){
         SUB_spot.setRow(rand()%10);
         SUB_direc = rand()%4 + 1; // 1-5
      }
-    cout<<"Submarine(3) "<<SUB_spot.getRow()<<","<<SUB_spot.getColumn()
-        << " " <<SUB_direc<<endl;
+    cout<<"Submarine(3) "<<SUB_spot.getRow()<<","<<SUB_spot.getColumn()<< " " <<SUB_direc<<endl;
 
     //Place Battleship
     Ship Iowa(BATTLESHIP);
@@ -212,8 +228,7 @@ void battleLocalWindow::createRandomBoard(){
         BAT_spot.setRow(rand()%10);
         BAT_direc = rand()%4 + 1; // 1-5
     }
-    cout<<"BattleShip(4) "<<BAT_spot.getRow()<<","<<BAT_spot.getColumn()
-        << " " <<BAT_direc<<endl;
+    cout<<"BattleShip(4) "<<BAT_spot.getRow()<<","<<BAT_spot.getColumn()<< " " <<BAT_direc<<endl;
 
     //Place Carrier
     Ship Enterprise( CARRIER );
@@ -222,8 +237,7 @@ void battleLocalWindow::createRandomBoard(){
         CAR_spot.setRow(rand()%10);
         CAR_direc = rand()%4 + 1; // 1-5
     }
-    cout<<"Carrier(5) "<<CAR_spot.getRow()<<","<<CAR_spot.getColumn()
-        << " " <<CAR_direc<<endl;
+    cout<<"Carrier(5) "<<CAR_spot.getRow()<<","<<CAR_spot.getColumn()<< " " <<CAR_direc<<endl;
 
     if(CurrentPlayer==2)
         nextTurn();
