@@ -40,7 +40,7 @@ Board::Board( int height, int width )
 {
 	rows = height;
 	columns = width;
-    numOfShips = 0;
+	numOfShips = 0;
 	board_data = new int[rows * columns];
 	for (int i = 0; i < rows * columns; ++i)
 	{
@@ -185,7 +185,7 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 	Ship myShip = newShip;
 	myShip.setLocation( spot );
 	myShip.setDirection( orientation );
-    numOfShips++;
+        numOfShips++;
 	shipNode *newNode = new shipNode();
 	newNode->data = myShip;
 	newNode->next = head;
@@ -253,20 +253,30 @@ bool Board::operator!= ( const Board& orig )
 }
 
 bool Board::gameStatus(){
-    int status;
-    shipNode *temp = head;
-    int sunkShips = 0;
+ //   int status;
+ //   shipNode *temp = head;
+ //   int sunkShips = 0;
 
-    while(temp!=NULL){
-        status = temp->data.getStatus();
-        if(status == 0){
-            sunkShips++;
-        }
-        temp = temp->next;
-    }
+//    while(temp!=NULL){
+//        status = temp->data.getStatus();
+//        if(status == 0){
+//            sunkShips++;
+//        }
+//        temp = temp->next;
+//    }
 
-    if(sunkShips==numOfShips){
-        return false; //False = game over
+//    if(sunkShips==numOfShips){
+//        return false; //False = game over
+//    }
+//    return true;
+    
+
+    for (int i = 0; i < rows; i++)
+    {
+	for (int j = 0; j < columns; j++)
+		if (board_data[columns * i + j] == HAS_SHIP)
+			return 1;
     }
-    return true;
+    
+    return 0;
 }
