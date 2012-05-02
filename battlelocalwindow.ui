@@ -229,7 +229,7 @@
         <string notr="true">background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>1 or W = Water</string>
+        <string>1 or E = Water</string>
        </property>
       </widget>
      </item>
@@ -249,7 +249,7 @@
         <string notr="true">background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>3 or O = Miss</string>
+        <string>3 or 0 = Miss</string>
        </property>
       </widget>
      </item>

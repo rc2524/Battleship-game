@@ -59,7 +59,7 @@ void battleLocalWindow::printBoardText(Board* boardToPrint, QTextBrowser *textbo
                     val = 1; //Opponent shouldn't know where ships are
                 }
 		if(val == 1){
-		    tempStr = "W";
+		    tempStr = "E";
 		    testOut.append(tempStr);
 		}
 		else if(val == 2){
@@ -67,7 +67,7 @@ void battleLocalWindow::printBoardText(Board* boardToPrint, QTextBrowser *textbo
 		    testOut.append(tempStr);
 		}
 		else if(val == 3){
-		    tempStr = "O";
+		    tempStr = "0";
 		    testOut.append(tempStr);
 		}
 		else if(val == 4){
