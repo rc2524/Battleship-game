@@ -17,7 +17,7 @@ battleLocalWindow::battleLocalWindow(QWidget *parent) :
     connect(ui->RandomButton, SIGNAL(pressed()), this, SLOT(createRandomBoard()));
     connect(ui->CustomButton, SIGNAL(pressed()), this, SLOT(createCustomBoard()));
     connect(ui->FireButton, SIGNAL(pressed()), this, SLOT(fire()));
-    srand(seed);
+    srand(localseed);
 }
 
 battleLocalWindow::~battleLocalWindow(){
@@ -146,21 +146,10 @@ bool battleLocalWindow::checkGame(){
 void battleLocalWindow::createCustomBoard(){
     //Dialog box for each location/ship/direction
     //update board
-    Board* boardIn;
-    if(CurrentPlayer == 1){
-        boardIn = Player1Board;
-        ui->PlayerGoing->setText("Player 2's Turn");
-        CurrentPlayer++;
-    }
-    else if(CurrentPlayer==2){
-        ui->PlayerGoing->setText("Player 1's Turn");
-        boardIn = Player2Board;
-        ui->RandomButton->setEnabled(FALSE);
-        ui->CustomButton->setEnabled(FALSE);
-        ui->FireButton->setEnabled(TRUE);
-        CurrentPlayer = 1;
-    }
-    //Should not make it here
+    //Needs code
+    QMessageBox::information(this, tr("Status: ERROR"),
+                             tr("Custom Board Creation not available. Please create random board"));
+    ui->CustomButton->setEnabled(FALSE);
 }
 
 void battleLocalWindow::createRandomBoard(){

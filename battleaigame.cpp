@@ -63,7 +63,7 @@ void BattleAIGame::createRandomBoard(){
         PT_spot.setRow(rand()%10);
         PT_direc = rand()%4 + 1; // 1-5
     }
-   // cout<<"Patrol(2) "<<PT_spot.getRow()<<","<<PT_spot.getColumn() << " " <<PT_direc<<endl;
+    cout<<"Patrol(2) "<<PT_spot.getRow()<<","<<PT_spot.getColumn() << " " <<PT_direc<<endl;
 
     //Place Destroyer
     Ship Farragut(DESTROYER);
@@ -136,7 +136,9 @@ void BattleAIGame::sunkShip(){
     else
         pShip = PlayerBoard->getShipLinkedList();
     for (; pShip; pShip = pShip->next) {
+               cout<<pShip->data.getStatus()<<endl;
         if ( pShip->data.getStatus() == 0 ) { // Ship is sunk
+            cout<<"sunkenship"<<endl;
             if(PlayerTurn == true){
                 switch (pShip->data.getShipType()){
                     case 1:
@@ -159,19 +161,19 @@ void BattleAIGame::sunkShip(){
            else{
                switch (pShip->data.getShipType()){
                    case 1:
-                      ui->Enemy_Pt->setText("<s>Patrol Boat<\s>");
+                      ui->Enemy_Pt->setText("<s>Patrol Boat</s>");
                       break;
                    case 2:
-                      ui->Player_Des->setText("<s>Destroyer<\s>");
+                      ui->Player_Des->setText("<s>Destroyer</s>");
                       break;
                    case 3:
-                      ui->Player_Sub->setText("<s>Submarine<\s>");
+                      ui->Player_Sub->setText("<s>Submarine</s>");
                       break;
                    case 4:
-                      ui->Player_Bat->setText("<s>Battleship<\s>");
+                      ui->Player_Bat->setText("<s>Battleship</s>");
                       break;
                    case 5:
-                      ui->Player_Car->setText("<s>Carrier<\s>");
+                      ui->Player_Car->setText("<s>Carrier</s>");
                       break;
             }
 
