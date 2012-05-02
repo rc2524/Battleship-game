@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
+    <width>700</width>
     <height>400</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="QLabel" name="GameLogo">
    <property name="geometry">
     <rect>
-     <x>178</x>
+     <x>248</x>
      <y>10</y>
      <width>200</width>
      <height>41</height>
@@ -37,7 +37,7 @@
   <widget class="QPushButton" name="CustomButton">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>450</x>
      <y>330</y>
      <width>121</width>
      <height>27</height>
@@ -50,7 +50,7 @@
   <widget class="QPushButton" name="RandomButton">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>450</x>
      <y>300</y>
      <width>121</width>
      <height>27</height>
@@ -66,7 +66,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>120</x>
      <y>300</y>
      <width>150</width>
      <height>27</height>
@@ -98,7 +98,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>350</x>
      <y>60</y>
      <width>221</width>
      <height>241</height>
@@ -126,7 +126,7 @@
   <widget class="QPushButton" name="FireButton">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>120</x>
      <y>330</y>
      <width>150</width>
      <height>27</height>
@@ -139,7 +139,7 @@
   <widget class="QWidget" name="layoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>48</x>
+     <x>118</x>
      <y>60</y>
      <width>231</width>
      <height>241</height>
@@ -166,6 +166,100 @@
         <width>16777215</width>
         <height>16777215</height>
        </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>75</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="EnemyShips">
+    <item>
+     <widget class="QLabel" name="Enemy_Pt">
+      <property name="text">
+       <string>PT_Boat</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Enemy_Des">
+      <property name="text">
+       <string>Destroyer</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Enemy_Sub">
+      <property name="text">
+       <string>Submarine</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Enemy_Bat">
+      <property name="text">
+       <string>Battleship</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Enemy_Car">
+      <property name="text">
+       <string>Carrier</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>60</y>
+     <width>75</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="PlayerShips">
+    <item>
+     <widget class="QLabel" name="Player_Pt">
+      <property name="text">
+       <string>PT_Boat</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Player_Des">
+      <property name="text">
+       <string>Destroyer</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Player_Sub">
+      <property name="text">
+       <string>Submarine</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Player_Bat">
+      <property name="text">
+       <string>Battleship</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="Player_Car">
+      <property name="text">
+       <string>Carrier</string>
       </property>
      </widget>
     </item>

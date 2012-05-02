@@ -156,5 +156,6 @@ bool Ship::recieveHit( int loc )
 
 int Ship::getSpotStatus( int loc ) const
 {
+
 	return myParts[loc];
 }

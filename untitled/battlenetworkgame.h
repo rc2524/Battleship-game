@@ -5,9 +5,7 @@
 #include "Board.h"
 #include <QTextBrowser>
 #include "client.h"
-
-static int seed = time(NULL);
-
+static int netseed = time(NULL);
 using namespace std;
 
 namespace Ui {

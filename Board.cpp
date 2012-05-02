@@ -18,9 +18,7 @@ std::ostream& operator<< (std::ostream& out, Board& b)
 		}
 		out << "\n";
 	}
-	
-	out << head << "\n";
-
+    
 	return out;
 }
 
@@ -42,6 +40,7 @@ Board::Board( int height, int width )
 {
 	rows = height;
 	columns = width;
+    numOfShips = 0;
 	board_data = new int[rows * columns];
 	for (int i = 0; i < rows * columns; ++i)
 	{
@@ -186,7 +185,7 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 	Ship myShip = newShip;
 	myShip.setLocation( spot );
 	myShip.setDirection( orientation );
-
+    numOfShips++;
 	shipNode *newNode = new shipNode();
 	newNode->data = myShip;
 	newNode->next = head;
@@ -251,4 +250,23 @@ bool Board::operator== ( const Board& orig )
 bool Board::operator!= ( const Board& orig )
 {
 	return !(*this == orig);
+}
+
+bool Board::gameStatus(){
+    int status;
+    shipNode *temp = head;
+    int sunkShips = 0;
+
+    while(temp!=NULL){
+        status = temp->data.getStatus();
+        if(status == 0){
+            sunkShips++;
+        }
+        temp = temp->next;
+    }
+
+    if(sunkShips==numOfShips){
+        return false; //False = game over
+    }
+    return true;
 }

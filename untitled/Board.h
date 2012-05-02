@@ -59,9 +59,10 @@ public:
 	Board& operator= ( const Board& orig );
 	bool operator!= ( const Board& orig );
 	bool operator== ( const Board& orig );
+shipNode *getShipLinkedList() { return head;}
 
 private:
-        int numOfShips; //Added
+    int numOfShips; //Added
 	int rows, columns;
 	int *board_data;
 	shipNode *head;

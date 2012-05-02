@@ -6,42 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
-    <height>303</height>
+    <width>550</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>BattleShip Network Game</string>
   </property>
-  <widget class="QLabel" name="OppName">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>50</y>
-     <width>221</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
-   </property>
-   <property name="text">
-    <string>Opponent Name</string>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="wordWrap">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="GameLogo">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>180</x>
      <y>10</y>
      <width>191</width>
      <height>41</height>
@@ -55,6 +30,143 @@
    <property name="text">
     <string>BattleShip</string>
    </property>
+  </widget>
+  <widget class="QPushButton" name="CustomButton">
+   <property name="geometry">
+    <rect>
+     <x>382</x>
+     <y>350</y>
+     <width>121</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Custom Board</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="RandomButton">
+   <property name="geometry">
+    <rect>
+     <x>382</x>
+     <y>320</y>
+     <width>121</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Random Board</string>
+   </property>
+  </widget>
+  <widget class="QSplitter" name="Coordinates">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>52</x>
+     <y>320</y>
+     <width>150</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QLabel" name="XLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>X:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="FireRowText"/>
+   <widget class="QLabel" name="YLabel">
+    <property name="text">
+     <string>Y:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="FireColText">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>282</x>
+     <y>80</y>
+     <width>221</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="PlayerWin">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetNoConstraint</enum>
+    </property>
+    <item>
+     <widget class="QLabel" name="PlayerBoardLabel">
+      <property name="text">
+       <string>Your Board</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="PlayerGameBoard"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="FireButton">
+   <property name="geometry">
+    <rect>
+     <x>52</x>
+     <y>350</y>
+     <width>150</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Fire</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>80</y>
+     <width>231</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="EnemyWin">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetNoConstraint</enum>
+    </property>
+    <item>
+     <widget class="QLabel" name="OppName">
+      <property name="text">
+       <string>Opponent's Board</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="OpponentGameBoard">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

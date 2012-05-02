@@ -1,7 +1,7 @@
 #ifndef BATTLENETWORKWINDOW_H
 #define BATTLENETWORKWINDOW_H
 
-#include "ui_battlenetworkwindow.h"
+//#include "ui_battlenetworkwindow.h"
 #include "client.h"
 #include <QWidget>
 

@@ -3,6 +3,9 @@
 
 #include "ui_InitialWindow.h"
 #include <QWidget>
+#include "battlenetworkwindow.h"
+#include "battleaigame.h"
+#include "battlelocalwindow.h"
 
 namespace Ui{
     class InitialWindow;

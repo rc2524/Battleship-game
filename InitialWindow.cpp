@@ -3,7 +3,7 @@
 #include "InitialWindow.h"
 #include "battlenetworkwindow.h"
 #include "battleaigame.h"
-#include "battlelocalgame.h"
+#include "battlelocalwindow.h"
 
 InitialWindow::InitialWindow(QWidget *parent):
     QDialog(parent),
@@ -38,7 +38,7 @@ void InitialWindow::AIPlay(){
 }
 
 void InitialWindow::LocalPlay(){
-    BattleLocalGame *TwoPlay = new BattleLocalGame();
+    battleLocalWindow *TwoPlay = new battleLocalWindow();
     TwoPlay->show();
     this->close();
 
