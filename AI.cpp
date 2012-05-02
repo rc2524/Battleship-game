@@ -40,34 +40,6 @@ std::istream& operator>> (std::istream& in, AI& ai) {
 		}
 	}
 
-
-	// Input ship data and mark all completely sunken ships
-	long unsigned int p;
-	in >> p;
-	for (const shipNode* pShip = (shipNode*)p; pShip; pShip = pShip->next) {
-		if ( pShip->data.getStatus() == 0 ) { // Ship is sunk
-			// Mark location of sunken ships
-			int ship_row = pShip->data.getLocation().getRow();
-			int ship_column = pShip->data.getLocation().getColumn();
-			for (int n; n < pShip->data.getShipLength(); ++n) {
-				switch (pShip->data.getDirection()) { 
-				  case NORTH:
-				  	ai.board[ship_row + n][ship_column] = 2;
-				  	break;
-				  case SOUTH:
-					ai.board[ship_row - n][ship_column] = 2;
-					break;
-				  case EAST:
-				  	ai.board[ship_row][ship_column + n] = 2;
-				  	break;
-				  case WEST:
-					ai.board[ship_row][ship_column - n] = 2;
-					break;
-				}
-			}
-		}	
-	}
-
 	return in;
 }
 
@@ -83,32 +55,6 @@ void AI::input_status(Board& b) {
 		}
 	}
 
-
-	// Input ship data and mark all completely sunken ships
-        shipNode* pShip = b.getShipLinkedList();
-	for (; pShip; pShip = pShip->next) {
-		if ( pShip->data.getStatus() == 0 ) { // Ship is sunk
-			// Mark location of sunken ships
-			int ship_row = pShip->data.getLocation().getRow();
-			int ship_column = pShip->data.getLocation().getColumn();
-			for (int n; n < pShip->data.getShipLength(); ++n) {
-				switch (pShip->data.getDirection()) { 
-				  case NORTH:
-				  	board[ship_row + n][ship_column] = 2;
-				  	break;
-				  case SOUTH:
-					board[ship_row - n][ship_column] = 2;
-					break;
-				  case EAST:
-				  	board[ship_row][ship_column + n] = 2;
-				  	break;
-				  case WEST:
-					board[ship_row][ship_column - n] = 2;
-					break;
-				}
-			}
-		}	
-	}
 }
 
 void AI::add_guess_options() {
