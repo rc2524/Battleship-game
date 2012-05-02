@@ -39,7 +39,7 @@ public:
 	bool recieveShot( Location spot );
 
 	// Gets the spot value (empty, hasShip, beenShotEmpty, beenShotHasShip, etc.)
-	int getSpotValue( Location& spot ) const;
+	int getSpotValue( Location spot ) const;
 
 	// Returns a location where x = rows and y = columns.  This is the bottom-right corner of the board.
 	Location getBoardSize() const;

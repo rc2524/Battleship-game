@@ -39,11 +39,14 @@ private:
     int CurrentPlayer;
     Board *Player1Board;
     Board *Player2Board;
+    Board *EnemyBoard;
+    Board *PlayerBoard;
     QString testOut;
     void switchPlayer();
     void printBoardText(Board *boardToPrint, QTextBrowser *textbox, bool showAll);
     void gameOver();
-    bool checkGame(Board *boardIn);
+    bool checkGame(); //Check EnemyBoard
+    bool goodCoordinate(int row, int col);
 };
 
 #endif // BATTLELOCALWINDOW_H

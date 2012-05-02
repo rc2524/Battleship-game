@@ -25,7 +25,6 @@ std::ostream& operator<< (std::ostream& out, Board& b)
 // Constructor
 Board::Board()
 {
-        numOfShips = 0;
 	rows = 10;
 	columns = 10;
 	board_data = new int[100]; // New matrix to hold the spot values. Length = rows * columns
@@ -39,7 +38,6 @@ Board::Board()
 // Constructor
 Board::Board( int height, int width )
 {
-        numOfShips = 0;
 	rows = height;
 	columns = width;
 	board_data = new int[rows * columns];
@@ -125,6 +123,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * (spot.getRow() - i) + spot.getColumn()] == HAS_SHIP)
+					return 0;
+			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * (spot.getRow() - i) + spot.getColumn()] = HAS_SHIP;
 			}
@@ -137,6 +138,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 			return 0; // Ship will not fit.
 		else
 		{
+			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * (spot.getRow() + i) + spot.getColumn()] == HAS_SHIP)
+					return 0;
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * (spot.getRow() + i) + spot.getColumn()] = HAS_SHIP;
@@ -151,6 +155,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 		else
 		{
 			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * spot.getRow() + i + spot.getColumn()] == HAS_SHIP)
+					return 0;
+			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * spot.getRow() + spot.getColumn() + i] = HAS_SHIP;
 			}
@@ -163,6 +170,9 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 			return 0; // Ship will not fit
 		else
 		{
+			for (int i = 0; i < newShip.getShipLength(); ++i)
+				if (board_data[columns * spot.getRow() - i + spot.getColumn()] == HAS_SHIP)
+					return 0;
 			for (int i = 0; i < newShip.getShipLength(); ++i)
 			{
 				board_data[columns * spot.getRow() + spot.getColumn() - i] = HAS_SHIP;
@@ -179,7 +189,6 @@ bool Board::placeShip( Ship& newShip, Location spot, int orientation )
 	newNode->data = myShip;
 	newNode->next = head;
 	head = newNode;
-        numOfShips++;
 	return 1;
 }
 
@@ -240,4 +249,23 @@ bool Board::operator== ( const Board& orig )
 bool Board::operator!= ( const Board& orig )
 {
 	return !(*this == orig);
+}
+
+bool Board::gameStatus(){
+    int status;
+    shipNode *temp = head;
+    int sunkShips = 0;
+
+    while(temp!=NULL){
+        status = temp->data.getStatus();
+        if(status == 0){
+            sunkShips++;
+        }
+        temp = temp->next;
+    }
+
+    if(sunkShips==numOfShips){
+        return false; //False = game over
+    }
+    return true;
 }
