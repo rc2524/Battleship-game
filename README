@@ -1,3 +1,9 @@
+This game was created by:
+Richard Clermont
+Michelle Ho
+Tyler Roberts
+Derek Loftis
+
 A simple battleship game where a player picks a row and column to "shoot" and the opponant responds by saying "hit" or "miss."  A visual grid is made to help the player remember where he has already guessed.  
 
 This current implementation does not have Network Play enabled. Only 2 player or 1 player is working with AI.
